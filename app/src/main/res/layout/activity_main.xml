@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/envBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="环境搭建"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/triangleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绘制三角形"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/squareBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绘制正方形"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/circleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绘制圆形"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/imageBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绘制图片"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/cameraBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Camera GLSurfaceView"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</ScrollView>
