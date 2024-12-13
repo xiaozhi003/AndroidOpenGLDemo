@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ImageFilterActivity">
 
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="原图"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:theme="@style/MyRadioButton" />
 
             <RadioButton
@@ -40,23 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="灰度"
-                android:textColor="@color/white"
-                android:theme="@style/MyRadioButton" />
-
-            <RadioButton
-                android:id="@+id/horizontalBlurRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="水平模糊"
-                android:textColor="@color/white"
-                android:theme="@style/MyRadioButton" />
-
-            <RadioButton
-                android:id="@+id/blendBlurRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="混合模糊"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:theme="@style/MyRadioButton" />
 
         </RadioGroup>

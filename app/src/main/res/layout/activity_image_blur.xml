@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ImageFilterActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/infoTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:padding="12dp"
+            android:textColor="@android:color/holo_red_light" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="模糊半径："
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/radiusSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:max="30"
+            android:min="0" />
+
+        <TextView
+            android:id="@+id/seekTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="16"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/filterRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <RadioButton
+                android:id="@+id/horizontalBlurRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="水平模糊"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/verticalBlurRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="垂直模糊"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/blendBlurRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="混合模糊"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+        </RadioGroup>
+
+    </HorizontalScrollView>
+
+</LinearLayout>

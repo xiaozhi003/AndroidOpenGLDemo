@@ -9,7 +9,7 @@
     <style name="Theme.OpenGLDemo" parent="Base.Theme.OpenGLDemo" />
 
     <style name="MyRadioButton" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/black</item>
         <item name="colorControlActivated">@android:color/holo_red_light</item>
     </style>
 

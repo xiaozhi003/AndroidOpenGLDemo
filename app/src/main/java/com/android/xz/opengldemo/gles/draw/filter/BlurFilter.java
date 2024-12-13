@@ -1,8 +1,6 @@
 package com.android.xz.opengldemo.gles.draw.filter;
 
 import android.opengl.GLES20;
-import android.util.Log;
-import android.view.ViewGroup;
 
 import com.android.xz.opengldemo.gles.GLESUtils;
 
@@ -59,7 +57,7 @@ public class BlurFilter extends BaseFilter {
                     "void main() {\n" +
                     "    vec4 rgba = texture2D(vTexture, aTexCoordinate);\n" +
 
-                    "    if (uBlurRadius <= 1) {\n" +
+                    "    if (uBlurRadius < 1) {\n" +
                     "        gl_FragColor = rgba;\n" +
                     "        return;\n" +
                     "    }\n" +
@@ -91,7 +89,7 @@ public class BlurFilter extends BaseFilter {
                     "void main() {\n" +
                     "    vec4 rgba = texture2D(vTexture, aTexCoordinate);\n" +
 
-                    "    if (uBlurRadius <= 1) {\n" +
+                    "    if (uBlurRadius < 1) {\n" +
                     "        gl_FragColor = rgba;\n" +
                     "        return;\n" +
                     "    }\n" +
@@ -170,7 +168,8 @@ public class BlurFilter extends BaseFilter {
     private int mTextureWidth;
     private int mTextureHeight;
 
-    public BlurFilter() {
+    public BlurFilter(String fragmentShader) {
+        fragmentShaderCode = fragmentShader;
         // 初始化形状坐标的顶点字节缓冲区
         vertexBuffer = ByteBuffer.allocateDirect(vertexCoords.length * 4)
                 .order(ByteOrder.nativeOrder())
@@ -186,8 +185,16 @@ public class BlurFilter extends BaseFilter {
         textureBuffer.position(0);
     }
 
-    public void setImageFilter(String filter) {
-        fragmentShaderCode = filter;
+    public void setFragmentShader(String fragmentShader) {
+        fragmentShaderCode = fragmentShader;
+    }
+
+    public void setBlurRadius(int blurRadius) {
+        mBlurRadius = blurRadius;
+    }
+
+    public void setBlurOffset(int blurOffset) {
+        mBlurOffset = blurOffset;
     }
 
     public void setTextureSize(int width, int height) {

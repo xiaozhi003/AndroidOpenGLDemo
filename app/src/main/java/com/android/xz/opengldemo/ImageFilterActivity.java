@@ -39,12 +39,6 @@ public class ImageFilterActivity extends AppCompatActivity {
                 case R.id.grayRadioBtn:
                     glSurfaceView.setImageFilter(new GrayFilter());
                     break;
-                case R.id.horizontalBlurRadioBtn:
-                    glSurfaceView.setImageFilter(new BlurFilter());
-                    break;
-                case R.id.blendBlurRadioBtn:
-                    glSurfaceView.setImageFilter(new BlendBlurFilter());
-                    break;
                 default:
                     break;
             }

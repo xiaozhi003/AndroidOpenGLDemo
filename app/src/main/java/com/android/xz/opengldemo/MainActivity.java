@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.cameraBtn).setOnClickListener(this);
         findViewById(R.id.imageBtn).setOnClickListener(this);
         findViewById(R.id.imageFilterBtn).setOnClickListener(this);
+        findViewById(R.id.imageBlurBtn).setOnClickListener(this);
     }
 
     private String getOpenGLESVersion() {
@@ -85,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.id.imageFilterBtn:
                     intent = new Intent(mContext, ImageFilterActivity.class);
+                    break;
+                case R.id.imageBlurBtn:
+                    intent = new Intent(mContext, ImageBlurActivity.class);
                     break;
             }
             startActivity(intent);

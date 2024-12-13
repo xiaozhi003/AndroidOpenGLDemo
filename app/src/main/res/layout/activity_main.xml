@@ -53,6 +53,12 @@
             android:layout_height="wrap_content"/>
 
         <Button
+            android:id="@+id/imageBlurBtn"
+            android:text="图片高斯模糊"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
             android:id="@+id/cameraBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,24 +1,14 @@
 package com.android.xz.opengldemo.gles.draw.filter;
 
-import android.opengl.GLES20;
-import android.opengl.Matrix;
-
 import com.android.xz.opengldemo.util.MatrixUtils;
 
-import java.text.Format;
-
 public class BlendBlurFilter extends BaseFilter {
-
     private int mTextureWidth;
     private int mTextureHeight;
 
     private BlurFilter mHorizontalFilter;
     private BlurFilter mVerticalFilter;
     private OriginFilter mOriginFilter;
-
-    float[] mvpMatrix = new float[16];
-    private int mWidth;
-    private int mHeight;
 
     @Override
     public void setTextureSize(int width, int height) {
@@ -28,22 +18,25 @@ public class BlendBlurFilter extends BaseFilter {
         mVerticalFilter.setTextureSize(mTextureWidth, mTextureHeight);
     }
 
+    public void setBlurRadius(int radius) {
+        mHorizontalFilter.setBlurRadius(radius);
+        mVerticalFilter.setBlurRadius(radius);
+    }
+
     @Override
     public void bindFBO(boolean bindFBO) {
     }
 
     @Override
     public void surfaceCreated() {
-        mHorizontalFilter = new BlurFilter();
+        mHorizontalFilter = new BlurFilter(BlurFilter.HORIZONTAL_BLUR_SHADER);
         mHorizontalFilter.setTextureSize(mTextureWidth, mTextureHeight);
         mHorizontalFilter.bindFBO(true);
-        mHorizontalFilter.setImageFilter(BlurFilter.HORIZONTAL_BLUR_SHADER);
         mHorizontalFilter.surfaceCreated();
 
-        mVerticalFilter = new BlurFilter();
+        mVerticalFilter = new BlurFilter(BlurFilter.VERTICAL_BLUR_SHADER);
         mVerticalFilter.setTextureSize(mTextureWidth, mTextureHeight);
         mVerticalFilter.bindFBO(true);
-        mVerticalFilter.setImageFilter(BlurFilter.VERTICAL_BLUR_SHADER);
         mVerticalFilter.surfaceCreated();
 
         mOriginFilter = new OriginFilter();
@@ -52,8 +45,6 @@ public class BlendBlurFilter extends BaseFilter {
 
     @Override
     public void surfaceChanged(int width, int height) {
-        mWidth = width;
-        mHeight = height;
         mHorizontalFilter.surfaceChanged(mTextureWidth, mTextureHeight);
         mVerticalFilter.surfaceChanged(mTextureWidth, mTextureHeight);
         mOriginFilter.surfaceChanged(width, height);

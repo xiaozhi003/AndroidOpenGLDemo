@@ -2,7 +2,7 @@ package com.android.xz.opengldemo.gles.draw.filter;
 
 public interface AFilter {
 
-    public void setTextureSize(int width, int height);
+    void setTextureSize(int width, int height);
 
     void bindFBO(boolean bindFBO);
 
