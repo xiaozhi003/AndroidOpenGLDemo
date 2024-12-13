@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "OpenGLDemo"
+rootProject.name = "AndroidOpenGLDemo"
 include ':app'

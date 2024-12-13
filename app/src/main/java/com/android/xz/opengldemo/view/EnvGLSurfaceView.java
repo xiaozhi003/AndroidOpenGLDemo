@@ -12,7 +12,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class EnvGLSurfaceView extends GLSurfaceView {
 
     private Context mContext;
-    private MyGLRenderer mRenderer;
+    private MyRenderer mRenderer;
 
     public EnvGLSurfaceView(Context context) {
         super(context);
@@ -29,7 +29,7 @@ public class EnvGLSurfaceView extends GLSurfaceView {
         // 创建OpenGL ES 2.0 context
         setEGLContextClientVersion(2);
 
-        mRenderer = new MyGLRenderer();
+        mRenderer = new MyRenderer();
 
         // 设置渲染器
         setRenderer(mRenderer);
@@ -37,7 +37,7 @@ public class EnvGLSurfaceView extends GLSurfaceView {
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 
-    static class MyGLRenderer implements GLSurfaceView.Renderer {
+    static class MyRenderer implements GLSurfaceView.Renderer {
 
         public void onSurfaceCreated(GL10 unused, EGLConfig config) {
             // 设置背景颜色为红色

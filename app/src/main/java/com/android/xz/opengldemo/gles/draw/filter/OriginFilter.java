@@ -1,53 +1,48 @@
-package com.android.xz.opengldemo.gles.draw;
+package com.android.xz.opengldemo.gles.draw.filter;
 
-import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
-import android.opengl.Matrix;
 import android.util.Log;
 
 import com.android.xz.opengldemo.gles.GLESUtils;
-import com.android.xz.opengldemo.util.MatrixUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import javax.microedition.khronos.opengles.GL10;
-
 /**
- * Camera数据绘制
+ * 定义图片
  */
-public class CameraFilter {
+public class OriginFilter extends BaseFilter {
 
-    private static final String TAG = CameraFilter.class.getSimpleName();
+    private static final String TAG = OriginFilter.class.getSimpleName();
 
     /**
      * 绘制的流程
      * 1.顶点着色程序 - 用于渲染形状的顶点的 OpenGL ES 图形代码
-     * 2.片段着色器 - 用于渲染具有特定颜色或形状的形状的形状的 OpenGL ES 代码 纹理。
+     * 2.片段着色器 - 用于渲染具有特定颜色或形状的形状的 OpenGL ES 代码纹理。
      * 3.程序 - 包含您想要用于绘制的着色器的 OpenGL ES 对象 一个或多个形状
      * <p>
      * 您至少需要一个顶点着色器来绘制形状，以及一个 fragment 着色器来为该形状着色。
-     * 这些着色器必须经过编译，然后添加到 OpenGL ES 程序中，该程序随后用于绘制 形状。
+     * 这些着色器必须经过编译，然后添加到 OpenGL ES 程序中，该程序随后用于绘制形状。
      */
 
     // 顶点着色器代码
     private final String vertexShaderCode =
             "uniform mat4 uMVPMatrix;\n" +
-                    "uniform mat4 uTexPMatrix;\n" +
+                    // 顶点坐标
                     "attribute vec4 vPosition;\n" +
-                    "attribute vec4 vTexCoordinate;\n" +
+                    // 纹理坐标
+                    "attribute vec2 vTexCoordinate;\n" +
                     "varying vec2 aTexCoordinate;\n" +
                     "void main() {\n" +
                     "  gl_Position = uMVPMatrix * vPosition;\n" +
-                    "  aTexCoordinate = (uTexPMatrix * vTexCoordinate).xy;\n" +
-                    "}";
+                    "  aTexCoordinate = vTexCoordinate;\n" +
+                    "}\n";
 
     // 片段着色器代码
     private final String fragmentShaderCode =
-            "#extension GL_OES_EGL_image_external : require\n" +
-                    "precision mediump float;\n" +
-                    "uniform samplerExternalOES vTexture;\n" +
+            "precision mediump float;\n" +
+                    "uniform sampler2D vTexture;\n" +
                     "varying vec2 aTexCoordinate;\n" +
                     "void main() {\n" +
                     "  gl_FragColor = texture2D(vTexture, aTexCoordinate);\n" +
@@ -74,10 +69,11 @@ public class CameraFilter {
      * (-1,-1),(1,-1)
      */
     private float vertexCoords[] = {
-            -1.0f, 1.0f,  // 左上
-            -1.0f, -1.0f, // 左下
-            1.0f, 1.0f,   // 右上
-            1.0f, -1.0f}; // 右下
+            -1.0f, 1.0f,   // 左上
+            -1.0f, -1.0f,  // 左下
+            1.0f, 1.0f,    // 右上
+            1.0f, -1.0f,   // 右下
+    };
 
     /**
      * 纹理坐标数组
@@ -95,7 +91,6 @@ public class CameraFilter {
             1.0f, 0.0f, // 右下
     };
 
-    private int textureId;
     private int positionHandle;
     // 纹理坐标句柄
     private int texCoordinateHandle;
@@ -103,21 +98,14 @@ public class CameraFilter {
     private int texHandle;
     // Use to access and set the view transformation
     private int vPMatrixHandle;
-    private int vTexPMatrixHandle;
 
     private final int vertexCount = vertexCoords.length / COORDS_PER_VERTEX;
     private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
 
-    // vPMatrix是“模型视图投影矩阵”的缩写
-    // 最终变化矩阵
-    private final float[] mMVPMatrix = new float[16];
-    // 投影矩阵
-    private final float[] mProjectionMatrix = new float[16];
-    // 相机矩阵
-    private final float[] mViewMatrix = new float[16];
+    private int mTextureWidth;
+    private int mTextureHeight;
 
-
-    public CameraFilter() {
+    public OriginFilter() {
         // 初始化形状坐标的顶点字节缓冲区
         vertexBuffer = ByteBuffer.allocateDirect(vertexCoords.length * 4)
                 .order(ByteOrder.nativeOrder())
@@ -133,10 +121,12 @@ public class CameraFilter {
         textureBuffer.position(0);
     }
 
-    public int getTextureId() {
-        return textureId;
+    public void setTextureSize(int width, int height) {
+        mTextureWidth = width;
+        mTextureHeight = height;
     }
 
+    @Override
     public void surfaceCreated() {
         // 加载顶点着色器程序
         int vertexShader = GLESUtils.loadShader(GLES20.GL_VERTEX_SHADER,
@@ -162,22 +152,22 @@ public class CameraFilter {
         vPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
         // 获取Texture句柄
         texHandle = GLES20.glGetUniformLocation(mProgram, "vTexture");
-        vTexPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uTexPMatrix");
-
-        // 创建纹理句柄
-        textureId = GLESUtils.createOESTexture();
     }
 
+    @Override
     public void surfaceChanged(int width, int height) {
+        super.surfaceChanged(width, height);
         GLES20.glViewport(0, 0, width, height);
-
-        // 获取原始矩阵，与原始矩阵相乘坐标不变
-        Matrix.setIdentityM(mMVPMatrix, 0);
     }
 
-    public void draw(float[] texMatrix) {
+    @Override
+    public void onDraw(int textureId, float[] matrix) {
         // 将程序添加到OpenGL ES环境
         GLES20.glUseProgram(mProgram);
+
+        // 重新绘制背景色为黑色
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         // 为正方形顶点启用控制句柄
         GLES20.glEnableVertexAttribArray(positionHandle);
@@ -190,24 +180,26 @@ public class CameraFilter {
         GLES20.glVertexAttribPointer(texCoordinateHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, textureBuffer);
 
         // 将投影和视图变换传递给着色器
-        GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mMVPMatrix, 0);
-        GLES20.glUniformMatrix4fv(vTexPMatrixHandle, 1, false, texMatrix, 0);
+        GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, matrix, 0);
 
         // 激活纹理编号0
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         // 绑定纹理
-        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
         // 设置纹理采样器编号，该编号和glActiveTexture中设置的编号相同
         GLES20.glUniform1i(texHandle, 0);
 
         // 绘制
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 
-        // 取消绑定纹理
-        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0);
-
         // 禁用顶点阵列
         GLES20.glDisableVertexAttribArray(positionHandle);
         GLES20.glDisableVertexAttribArray(texCoordinateHandle);
+    }
+
+    @Override
+    public void release() {
+        GLES20.glDeleteProgram(mProgram);
+        mProgram = -1;
     }
 }

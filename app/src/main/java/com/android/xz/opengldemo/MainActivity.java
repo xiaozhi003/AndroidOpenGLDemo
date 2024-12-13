@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.circleBtn).setOnClickListener(this);
         findViewById(R.id.cameraBtn).setOnClickListener(this);
         findViewById(R.id.imageBtn).setOnClickListener(this);
+        findViewById(R.id.imageFilterBtn).setOnClickListener(this);
     }
 
     private String getOpenGLESVersion() {
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.imageBtn:
                     intent = new Intent(mContext, GLActivity.class);
                     intent.putExtra(GLActivity.EXTRA_GL_VIEW_TYPE, GLActivity.TYPE_IMAGE);
+                    break;
+                case R.id.imageFilterBtn:
+                    intent = new Intent(mContext, ImageFilterActivity.class);
                     break;
             }
             startActivity(intent);

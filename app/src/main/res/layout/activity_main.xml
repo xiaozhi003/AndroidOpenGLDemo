@@ -47,6 +47,12 @@
             android:textAllCaps="false" />
 
         <Button
+            android:id="@+id/imageFilterBtn"
+            android:text="图片滤镜"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
             android:id="@+id/cameraBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

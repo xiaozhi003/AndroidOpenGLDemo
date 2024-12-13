@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".ImageFilterActivity">
+
+    <FrameLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/filterRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <RadioButton
+                android:id="@+id/originRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="原图"
+                android:textColor="@color/white"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/grayRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="灰度"
+                android:textColor="@color/white"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/horizontalBlurRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="水平模糊"
+                android:textColor="@color/white"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/blendBlurRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="混合模糊"
+                android:textColor="@color/white"
+                android:theme="@style/MyRadioButton" />
+
+        </RadioGroup>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
