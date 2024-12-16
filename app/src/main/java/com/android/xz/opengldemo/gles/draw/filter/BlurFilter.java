@@ -9,7 +9,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * 灰度滤镜
+ * 模糊滤镜
  */
 public class BlurFilter extends BaseFilter {
 

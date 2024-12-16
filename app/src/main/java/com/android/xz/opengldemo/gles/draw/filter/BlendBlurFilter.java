@@ -2,6 +2,9 @@ package com.android.xz.opengldemo.gles.draw.filter;
 
 import com.android.xz.opengldemo.util.MatrixUtils;
 
+/**
+ * 混合模糊滤镜
+ */
 public class BlendBlurFilter extends BaseFilter {
     private int mTextureWidth;
     private int mTextureHeight;
