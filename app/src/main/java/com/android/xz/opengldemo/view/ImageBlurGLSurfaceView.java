@@ -120,7 +120,7 @@ public class ImageBlurGLSurfaceView extends GLSurfaceView {
             mHeight = height;
             int w = mBitmap.getWidth();
             int h = mBitmap.getHeight();
-            MatrixUtils.getMatrix(mMVPMatrix, MatrixUtils.TYPE_CENTERCROP, w, h, width, height);
+            MatrixUtils.getMatrix(mMVPMatrix, MatrixUtils.TYPE_CENTERINSIDE, w, h, width, height);
             /**
              * 由于Bitmap拷贝到纹理中，数据从Bitmap左上角开始拷贝到纹理的原点(0,0)
              * 导致图像上下翻转了180度，所以绘制坐标需要上下翻转180度才行

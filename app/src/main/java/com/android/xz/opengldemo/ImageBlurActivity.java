@@ -43,7 +43,7 @@ public class ImageBlurActivity extends AppCompatActivity {
         lp.gravity = Gravity.CENTER;
         mContentLayout.addView(glSurfaceView);
 
-        glSurfaceView.setDrawListener(millis -> runOnUiThread(() -> mInfoTv.setText("耗时：" + millis)));
+        glSurfaceView.setDrawListener(millis -> runOnUiThread(() -> mInfoTv.setText("耗时：" + millis + "ms")));
 
         mFilterRadioGroup = findViewById(R.id.filterRadioGroup);
         mFilterRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -68,6 +68,8 @@ public class ImageBlurActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mSeekTv.setText(progress + "");
+                int radius = seekBar.getProgress();
+                glSurfaceView.setBlurRadius(radius);
             }
 
             @Override
@@ -77,9 +79,6 @@ public class ImageBlurActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int radius = seekBar.getProgress();
-                glSurfaceView.setBlurRadius(radius);
-                mSeekTv.setText("" + radius);
             }
         });
         mRadiusSeekBar.setProgress(5);
