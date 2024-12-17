@@ -21,7 +21,7 @@
             android:id="@+id/filterRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_gravity="bottom"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp">
@@ -40,6 +40,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="灰度"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/invertRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="反相"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/brightenRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提亮"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/darkenRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="变暗"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/warmRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暖色"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/coolRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="冷色"
                 android:textColor="@color/black"
                 android:theme="@style/MyRadioButton" />
 
