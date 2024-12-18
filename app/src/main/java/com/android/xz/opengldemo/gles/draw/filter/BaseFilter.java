@@ -136,12 +136,14 @@ public abstract class BaseFilter implements AFilter {
     public int draw(int textureId, float[] matrix) {
         GLES20.glViewport(0, 0, mWidth, mHeight);
         if (bindFBO) {
+            // 绑定FBO
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffer);
         }
 
         onDraw(textureId, matrix);
 
         if (bindFBO) {
+            // 解绑FBO
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
             //返回fbo的纹理id
             return mOffscreenTexture;
