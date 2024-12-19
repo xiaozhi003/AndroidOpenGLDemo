@@ -19,6 +19,9 @@
         android:theme="@style/Theme.OpenGLDemo"
         tools:targetApi="31">
         <activity
+            android:name=".FBOReadActivity"
+            android:exported="false" />
+        <activity
             android:name=".ImageBlurActivity"
             android:exported="false" />
         <activity

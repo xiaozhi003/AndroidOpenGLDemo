@@ -4,6 +4,10 @@ public interface AFilter {
 
     void setTextureSize(int width, int height);
 
+    void setFrameBuffer(int frameBuffer);
+
+    int getOffscreenTexture();
+
     void bindFBO(boolean bindFBO);
 
     void surfaceCreated();

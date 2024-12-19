@@ -49,10 +49,10 @@ public class ImageFilterActivity extends AppCompatActivity {
                     glSurfaceView.setImageFilter(new HueFilter(new float[]{-0.1f, -0.1f, -0.1f}));
                     break;
                 case R.id.warmRadioBtn: // 暖色
-                    glSurfaceView.setImageFilter(new HueFilter(new float[]{0.1f, 0.1f, 0.0f}));
+                    glSurfaceView.setImageFilter(new HueFilter(new float[]{0.0f, 0.0f, -0.1f}));
                     break;
                 case R.id.coolRadioBtn: // 冷色
-                    glSurfaceView.setImageFilter(new HueFilter(new float[]{0, 0, 0.1f}));
+                    glSurfaceView.setImageFilter(new HueFilter(new float[]{-0.1f, -0.1f, 0.0f}));
                     break;
                 default:
                     break;

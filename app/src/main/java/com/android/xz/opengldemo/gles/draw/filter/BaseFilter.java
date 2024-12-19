@@ -33,6 +33,26 @@ public abstract class BaseFilter implements AFilter {
         this.bindFBO = bindFBO;
     }
 
+    @Override
+    public void setFrameBuffer(int frameBuffer) {
+        mFrameBuffer = frameBuffer;
+    }
+
+    @Override
+    public int getOffscreenTexture() {
+        return mOffscreenTexture;
+    }
+
+    public void bindFBO() {
+        if (mFrameBuffer > 0) {
+            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffer);
+        }
+    }
+
+    public void unBindFBO() {
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+    }
+
     /**
      * 创建帧缓冲区（FBO）
      *
@@ -98,9 +118,12 @@ public abstract class BaseFilter implements AFilter {
             throw new RuntimeException("Framebuffer not complete, status=" + status);
         }
 
-        //解绑
+        // 解绑纹理
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+        // 解绑Frame Buffer
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        // 解绑Render Buffer
+        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, 0);
 
         GLESUtils.checkGlError("prepareFramebuffer done");
     }
@@ -137,14 +160,14 @@ public abstract class BaseFilter implements AFilter {
         GLES20.glViewport(0, 0, mWidth, mHeight);
         if (bindFBO) {
             // 绑定FBO
-            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffer);
+            bindFBO();
         }
 
         onDraw(textureId, matrix);
 
         if (bindFBO) {
             // 解绑FBO
-            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+            unBindFBO();
             //返回fbo的纹理id
             return mOffscreenTexture;
         } else {

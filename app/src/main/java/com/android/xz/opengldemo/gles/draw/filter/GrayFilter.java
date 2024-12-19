@@ -120,10 +120,6 @@ public class GrayFilter extends BaseFilter {
         textureBuffer.position(0);
     }
 
-    public void setImageFilter(String filter) {
-        fragmentShaderCode = filter;
-    }
-
     @Override
     public void setTextureSize(int width, int height) {
     }
