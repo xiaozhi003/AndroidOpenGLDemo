@@ -84,7 +84,7 @@ public abstract class BaseFilter implements AFilter {
         GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height);
         GLESUtils.checkGlError("glRenderbufferStorage");
 
-        // 6.将深度缓冲区和纹理（颜色缓冲区）附加到帧缓冲区对象
+        // 6.将深度缓冲区和纹理（颜色缓冲区）附着到帧缓冲区对象
         GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
                 GLES20.GL_RENDERBUFFER, mDepthBuffer);
         GLESUtils.checkGlError("glFramebufferRenderbuffer");
