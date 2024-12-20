@@ -29,7 +29,7 @@ public abstract class BaseFilter implements AFilter {
     private int mHeight;
 
     @Override
-    public void bindFBO(boolean bindFBO) {
+    public void setBindFBO(boolean bindFBO) {
         this.bindFBO = bindFBO;
     }
 
@@ -43,12 +43,14 @@ public abstract class BaseFilter implements AFilter {
         return mOffscreenTexture;
     }
 
+    @Override
     public void bindFBO() {
         if (mFrameBuffer > 0) {
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffer);
         }
     }
 
+    @Override
     public void unBindFBO() {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
     }

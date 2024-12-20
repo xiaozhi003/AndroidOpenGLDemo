@@ -14,6 +14,7 @@ import com.android.xz.opengldemo.gles.GLESUtils;
 import com.android.xz.opengldemo.gles.draw.filter.AFilter;
 import com.android.xz.opengldemo.gles.draw.filter.BlendBlurFilter;
 import com.android.xz.opengldemo.gles.draw.filter.OriginFilter;
+import com.android.xz.opengldemo.gles.draw.filter.OverlayFilter;
 import com.android.xz.opengldemo.util.MatrixUtils;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -72,6 +73,7 @@ public class ImageFilterGLSurfaceView extends GLSurfaceView {
                 mImageFilter.release();
             }
             mImageFilter = filter;
+            mImageFilter.setTextureSize(mBitmap.getWidth(), mBitmap.getHeight());
             mImageFilter.surfaceCreated();
             mImageFilter.surfaceChanged(mWidth, mHeight);
         }

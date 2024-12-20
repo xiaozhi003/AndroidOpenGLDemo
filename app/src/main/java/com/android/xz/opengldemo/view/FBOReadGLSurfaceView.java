@@ -61,7 +61,7 @@ public class FBOReadGLSurfaceView extends GLSurfaceView {
         public MyRenderer(Context context) {
             mContext = context;
             mBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.girl);
-            mImageFilter.bindFBO(true);
+            mImageFilter.setBindFBO(true);
             Matrix.setIdentityM(mMVPMatrix, 0);
         }
 

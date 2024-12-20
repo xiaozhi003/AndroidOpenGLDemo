@@ -13,6 +13,16 @@ public class BlendBlurFilter extends BaseFilter {
     private BlurFilter mVerticalFilter;
     private OriginFilter mOriginFilter;
 
+    public BlendBlurFilter() {
+        mHorizontalFilter = new BlurFilter(BlurFilter.HORIZONTAL_BLUR_SHADER);
+        mHorizontalFilter.setBindFBO(true);
+
+        mVerticalFilter = new BlurFilter(BlurFilter.VERTICAL_BLUR_SHADER);
+        mVerticalFilter.setBindFBO(true);
+
+        mOriginFilter = new OriginFilter();
+    }
+
     @Override
     public void setTextureSize(int width, int height) {
         mTextureWidth = width;
@@ -27,22 +37,13 @@ public class BlendBlurFilter extends BaseFilter {
     }
 
     @Override
-    public void bindFBO(boolean bindFBO) {
+    public void setBindFBO(boolean bindFBO) {
     }
 
     @Override
     public void surfaceCreated() {
-        mHorizontalFilter = new BlurFilter(BlurFilter.HORIZONTAL_BLUR_SHADER);
-        mHorizontalFilter.setTextureSize(mTextureWidth, mTextureHeight);
-        mHorizontalFilter.bindFBO(true);
         mHorizontalFilter.surfaceCreated();
-
-        mVerticalFilter = new BlurFilter(BlurFilter.VERTICAL_BLUR_SHADER);
-        mVerticalFilter.setTextureSize(mTextureWidth, mTextureHeight);
-        mVerticalFilter.bindFBO(true);
         mVerticalFilter.surfaceCreated();
-
-        mOriginFilter = new OriginFilter();
         mOriginFilter.surfaceCreated();
     }
 

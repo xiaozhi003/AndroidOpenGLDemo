@@ -83,6 +83,14 @@
                 android:textColor="@color/black"
                 android:theme="@style/MyRadioButton" />
 
+            <RadioButton
+                android:id="@+id/overlayRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="叠加"
+                android:textColor="@color/black"
+                android:theme="@style/MyRadioButton" />
+
         </RadioGroup>
 
     </HorizontalScrollView>

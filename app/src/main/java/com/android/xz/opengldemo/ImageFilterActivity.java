@@ -12,6 +12,7 @@ import com.android.xz.opengldemo.gles.draw.filter.GrayFilter;
 import com.android.xz.opengldemo.gles.draw.filter.HueFilter;
 import com.android.xz.opengldemo.gles.draw.filter.InvertFilter;
 import com.android.xz.opengldemo.gles.draw.filter.OriginFilter;
+import com.android.xz.opengldemo.gles.draw.filter.OverlayFilter;
 import com.android.xz.opengldemo.view.ImageFilterGLSurfaceView;
 
 public class ImageFilterActivity extends AppCompatActivity {
@@ -53,6 +54,9 @@ public class ImageFilterActivity extends AppCompatActivity {
                     break;
                 case R.id.coolRadioBtn: // 冷色
                     glSurfaceView.setImageFilter(new HueFilter(new float[]{-0.1f, -0.1f, 0.0f}));
+                    break;
+                case R.id.overlayRadioBtn: // 叠加
+                    glSurfaceView.setImageFilter(new OverlayFilter());
                     break;
                 default:
                     break;

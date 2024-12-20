@@ -8,7 +8,11 @@ public interface AFilter {
 
     int getOffscreenTexture();
 
-    void bindFBO(boolean bindFBO);
+    void setBindFBO(boolean bindFBO);
+
+    void bindFBO();
+
+    void unBindFBO();
 
     void surfaceCreated();
 
