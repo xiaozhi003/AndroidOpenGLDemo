@@ -39,6 +39,11 @@ public abstract class BaseFilter implements AFilter {
     }
 
     @Override
+    public int getFrameBuffer() {
+        return mFrameBuffer;
+    }
+
+    @Override
     public int getOffscreenTexture() {
         return mOffscreenTexture;
     }

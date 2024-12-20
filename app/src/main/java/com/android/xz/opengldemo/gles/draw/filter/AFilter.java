@@ -6,6 +6,8 @@ public interface AFilter {
 
     void setFrameBuffer(int frameBuffer);
 
+    int getFrameBuffer();
+
     int getOffscreenTexture();
 
     void setBindFBO(boolean bindFBO);
