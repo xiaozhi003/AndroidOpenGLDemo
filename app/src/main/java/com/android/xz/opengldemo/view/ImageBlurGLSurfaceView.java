@@ -4,11 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.ViewTreeObserver;
 
 import com.android.xz.opengldemo.R;
 import com.android.xz.opengldemo.gles.GLESUtils;
@@ -86,12 +83,10 @@ public class ImageBlurGLSurfaceView extends GLSurfaceView {
         }
 
         public void setBlurRadius(int radius) {
-            if (mBlurFilter != null) {
-                if (mBlurFilter instanceof BlurFilter) {
-                    ((BlurFilter) mBlurFilter).setBlurRadius(radius);
-                } else if (mBlurFilter instanceof BlendBlurFilter) {
-                    ((BlendBlurFilter) mBlurFilter).setBlurRadius(radius);
-                }
+            if (mBlurFilter instanceof BlurFilter) {
+                ((BlurFilter) mBlurFilter).setBlurRadius(radius);
+            } else if (mBlurFilter instanceof BlendBlurFilter) {
+                ((BlendBlurFilter) mBlurFilter).setBlurRadius(radius);
             }
         }
 
@@ -140,13 +135,10 @@ public class ImageBlurGLSurfaceView extends GLSurfaceView {
             if (mDrawListener != null) {
                 mDrawListener.onDraw((System.currentTimeMillis() - start));
             }
-//            Log.i(TAG, "onDrawFrame:" + (System.currentTimeMillis() - start) + "ms");
         }
 
         public void release() {
-            if (mBlurFilter != null) {
-                mBlurFilter.release();
-            }
+            mBlurFilter.release();
         }
     }
 

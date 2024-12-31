@@ -1,17 +1,17 @@
 package com.android.xz.opengldemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.xz.opengldemo.gles.draw.filter.GrayFilter;
 import com.android.xz.opengldemo.gles.draw.filter.HueFilter;
 import com.android.xz.opengldemo.gles.draw.filter.InvertFilter;
-import com.android.xz.opengldemo.gles.draw.filter.OriginFilter;
+import com.android.xz.opengldemo.gles.draw.filter.Texture2DFilter;
 import com.android.xz.opengldemo.gles.draw.filter.OverlayFilter;
 import com.android.xz.opengldemo.view.ImageFilterGLSurfaceView;
 
@@ -35,7 +35,7 @@ public class ImageFilterActivity extends AppCompatActivity {
         mFilterRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.originRadioBtn: // 原图
-                    glSurfaceView.setImageFilter(new OriginFilter());
+                    glSurfaceView.setImageFilter(new Texture2DFilter());
                     break;
                 case R.id.grayRadioBtn: // 灰度
                     glSurfaceView.setImageFilter(new GrayFilter());

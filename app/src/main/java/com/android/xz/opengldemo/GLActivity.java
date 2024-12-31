@@ -1,10 +1,10 @@
 package com.android.xz.opengldemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.xz.opengldemo.view.CircleGLSurfaceView;
 import com.android.xz.opengldemo.view.EnvGLSurfaceView;

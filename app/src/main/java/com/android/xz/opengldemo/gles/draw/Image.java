@@ -3,7 +3,6 @@ package com.android.xz.opengldemo.gles.draw;
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
-import android.opengl.Matrix;
 import android.util.Log;
 
 import com.android.xz.opengldemo.gles.GLESUtils;

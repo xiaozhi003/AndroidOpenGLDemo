@@ -1,7 +1,6 @@
 package com.android.xz.opengldemo.gles.draw.filter;
 
 import android.opengl.GLES20;
-import android.util.Log;
 
 import com.android.xz.opengldemo.gles.GLESUtils;
 
@@ -10,11 +9,11 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * 定义图片
+ * 显示2D纹理图像
  */
-public class OriginFilter extends BaseFilter {
+public class Texture2DFilter extends BaseFilter {
 
-    private static final String TAG = OriginFilter.class.getSimpleName();
+    private static final String TAG = Texture2DFilter.class.getSimpleName();
 
     /**
      * 绘制的流程
@@ -105,7 +104,7 @@ public class OriginFilter extends BaseFilter {
     private int mTextureWidth;
     private int mTextureHeight;
 
-    public OriginFilter() {
+    public Texture2DFilter() {
         // 初始化形状坐标的顶点字节缓冲区
         vertexBuffer = ByteBuffer.allocateDirect(vertexCoords.length * 4)
                 .order(ByteOrder.nativeOrder())

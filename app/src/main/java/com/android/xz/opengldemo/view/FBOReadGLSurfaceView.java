@@ -96,9 +96,7 @@ public class FBOReadGLSurfaceView extends GLSurfaceView {
         @Override
         protected void finalize() throws Throwable {
             super.finalize();
-            if (mImageFilter != null) {
-                mImageFilter.release();
-            }
+            mImageFilter.release();
         }
 
         public static byte[] Bitmap2Bytes(Bitmap bm, int compress) {

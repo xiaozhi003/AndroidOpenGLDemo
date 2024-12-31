@@ -11,7 +11,7 @@ public class BlendBlurFilter extends BaseFilter {
 
     private BlurFilter mHorizontalFilter;
     private BlurFilter mVerticalFilter;
-    private OriginFilter mOriginFilter;
+    private Texture2DFilter mOriginFilter;
 
     public BlendBlurFilter() {
         mHorizontalFilter = new BlurFilter(BlurFilter.HORIZONTAL_BLUR_SHADER);
@@ -20,7 +20,7 @@ public class BlendBlurFilter extends BaseFilter {
         mVerticalFilter = new BlurFilter(BlurFilter.VERTICAL_BLUR_SHADER);
         mVerticalFilter.setBindFBO(true);
 
-        mOriginFilter = new OriginFilter();
+        mOriginFilter = new Texture2DFilter();
     }
 
     @Override

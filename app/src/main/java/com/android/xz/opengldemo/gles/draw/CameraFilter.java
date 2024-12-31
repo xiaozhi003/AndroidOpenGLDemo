@@ -3,21 +3,18 @@ package com.android.xz.opengldemo.gles.draw;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
-import android.util.Log;
 
 import com.android.xz.opengldemo.gles.GLESUtils;
-import com.android.xz.opengldemo.util.MatrixUtils;
+import com.android.xz.opengldemo.gles.draw.filter.BaseFilter;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import javax.microedition.khronos.opengles.GL10;
-
 /**
  * Camera数据绘制
  */
-public class CameraFilter {
+public class CameraFilter extends BaseFilter {
 
     private static final String TAG = CameraFilter.class.getSimpleName();
 
@@ -95,7 +92,6 @@ public class CameraFilter {
             1.0f, 0.0f, // 右下
     };
 
-    private int textureId;
     private int positionHandle;
     // 纹理坐标句柄
     private int texCoordinateHandle;
@@ -133,10 +129,12 @@ public class CameraFilter {
         textureBuffer.position(0);
     }
 
-    public int getTextureId() {
-        return textureId;
+    @Override
+    public void setTextureSize(int width, int height) {
+
     }
 
+    @Override
     public void surfaceCreated() {
         // 加载顶点着色器程序
         int vertexShader = GLESUtils.loadShader(GLES20.GL_VERTEX_SHADER,
@@ -163,19 +161,17 @@ public class CameraFilter {
         // 获取Texture句柄
         texHandle = GLES20.glGetUniformLocation(mProgram, "vTexture");
         vTexPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uTexPMatrix");
-
-        // 创建纹理句柄
-        textureId = GLESUtils.createOESTexture();
     }
 
+    @Override
     public void surfaceChanged(int width, int height) {
-        GLES20.glViewport(0, 0, width, height);
-
+        super.surfaceChanged(width, height);
         // 获取原始矩阵，与原始矩阵相乘坐标不变
         Matrix.setIdentityM(mMVPMatrix, 0);
     }
 
-    public void draw(float[] texMatrix) {
+    @Override
+    public void onDraw(int textureId, float[] matrix) {
         // 将程序添加到OpenGL ES环境
         GLES20.glUseProgram(mProgram);
 
@@ -191,7 +187,7 @@ public class CameraFilter {
 
         // 将投影和视图变换传递给着色器
         GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mMVPMatrix, 0);
-        GLES20.glUniformMatrix4fv(vTexPMatrixHandle, 1, false, texMatrix, 0);
+        GLES20.glUniformMatrix4fv(vTexPMatrixHandle, 1, false, matrix, 0);
 
         // 激活纹理编号0
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);

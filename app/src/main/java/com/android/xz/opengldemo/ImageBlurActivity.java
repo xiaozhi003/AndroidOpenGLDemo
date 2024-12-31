@@ -1,8 +1,5 @@
 package com.android.xz.opengldemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,11 +9,11 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.xz.opengldemo.gles.draw.filter.BlendBlurFilter;
 import com.android.xz.opengldemo.gles.draw.filter.BlurFilter;
 import com.android.xz.opengldemo.view.ImageBlurGLSurfaceView;
-
-import org.w3c.dom.Text;
 
 public class ImageBlurActivity extends AppCompatActivity {
 

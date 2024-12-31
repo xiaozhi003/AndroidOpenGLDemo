@@ -1,8 +1,5 @@
 package com.android.xz.opengldemo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -12,6 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.xz.opengldemo.permission.IPermissionsResult;
 import com.android.xz.opengldemo.permission.PermissionUtils;

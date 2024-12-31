@@ -1,6 +1,5 @@
 package com.android.xz.opengldemo.util;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import java.io.BufferedReader;

@@ -11,7 +11,7 @@ public class OverlayFilter extends BaseFilter {
     private int mTextureHeight;
     private GrayFilter mGrayFilter;
     private HueFilter mHueFilter;
-    private OriginFilter mOriginFilter;
+    private Texture2DFilter mOriginFilter;
 
     public OverlayFilter() {
         mGrayFilter = new GrayFilter();
@@ -20,7 +20,7 @@ public class OverlayFilter extends BaseFilter {
         mHueFilter = new HueFilter(new float[]{-0.2f, -0.2f, -0.2f});
         mHueFilter.setBindFBO(true);
 
-        mOriginFilter = new OriginFilter();
+        mOriginFilter = new Texture2DFilter();
     }
 
     @Override

@@ -3,8 +3,6 @@ package com.android.xz.opengldemo.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -12,9 +10,7 @@ import android.util.Log;
 import com.android.xz.opengldemo.R;
 import com.android.xz.opengldemo.gles.GLESUtils;
 import com.android.xz.opengldemo.gles.draw.filter.AFilter;
-import com.android.xz.opengldemo.gles.draw.filter.BlendBlurFilter;
-import com.android.xz.opengldemo.gles.draw.filter.OriginFilter;
-import com.android.xz.opengldemo.gles.draw.filter.OverlayFilter;
+import com.android.xz.opengldemo.gles.draw.filter.Texture2DFilter;
 import com.android.xz.opengldemo.util.MatrixUtils;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -55,7 +51,7 @@ public class ImageFilterGLSurfaceView extends GLSurfaceView {
     static class MyRenderer implements Renderer {
 
         private Context mContext;
-        private AFilter mImageFilter = new OriginFilter();
+        private AFilter mImageFilter = new Texture2DFilter();
         private int mTextureId;
         private Bitmap mBitmap;
         private float[] mMVPMatrix = new float[16];
@@ -104,6 +100,12 @@ public class ImageFilterGLSurfaceView extends GLSurfaceView {
             long start = System.currentTimeMillis();
             mImageFilter.draw(mTextureId, mMVPMatrix);
             Log.i(TAG, "onDrawFrame:" + (System.currentTimeMillis() - start) + "ms");
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+            mImageFilter.release();
         }
     }
 }

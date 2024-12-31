@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 
 import com.android.xz.opengldemo.camera.CameraManager;
 import com.android.xz.opengldemo.camera.callback.CameraCallback;
+import com.android.xz.opengldemo.gles.GLESUtils;
 import com.android.xz.opengldemo.gles.draw.CameraFilter;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -146,7 +147,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements SurfaceTexture
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
             mCameraFilter.surfaceCreated();
-            mTextureId = mCameraFilter.getTextureId();
+            mTextureId = GLESUtils.createOESTexture();
             mSurfaceTexture = new SurfaceTexture(mTextureId);
             mView.mMainHandler.post(() -> mView.surfaceTextureCreated(mSurfaceTexture));
         }
@@ -163,7 +164,13 @@ public class CameraGLSurfaceView extends GLSurfaceView implements SurfaceTexture
             // 获取SurfaceTexture变换矩阵
             mSurfaceTexture.getTransformMatrix(mDisplayProjectionMatrix);
             // 将SurfaceTexture绘制到GLSurfaceView上
-            mCameraFilter.draw(mDisplayProjectionMatrix);
+            mCameraFilter.draw(mTextureId, mDisplayProjectionMatrix);
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+            mCameraFilter.release();
         }
     }
 }
