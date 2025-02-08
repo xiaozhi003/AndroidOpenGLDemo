@@ -3,7 +3,9 @@ package com.android.xz.opengldemo.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
@@ -156,11 +158,11 @@ public class ImageBlurGLSurfaceView extends GLSurfaceView {
         int width = origin.getWidth();
         int height = origin.getHeight();
         Matrix matrix = new Matrix();
-        matrix.preScale(ratio, ratio);
-        Bitmap newBm = Bitmap.createBitmap(origin, 0, 0, width, height, matrix, false);
-        if (newBm.equals(origin)) {
-            return newBm;
-        }
+        matrix.postScale(ratio, ratio, 0, 0);
+        Bitmap newBm = Bitmap.createBitmap((int) (width * ratio), (int) (height * ratio), Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(newBm);
+        Paint paint = new Paint();
+        canvas.drawBitmap(origin, matrix, paint);
         return newBm;
     }
 
